@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!-- Disable Zoom -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load("current", {packages:["corechart"]});
@@ -9,37 +10,51 @@
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ['Task', 'Hours per Day'],
-        ['Work', 8],
-        ['Eat', 2],
-        ['TV', 2],
-        ['Gym', 2],
-        ['Sleep', 8]
+        ['Work', 8],  
+        ['Eat', 2],  
+        ['TV', 2],  
+        ['Gym', 2],  
+        ['Sleep', 8]  
       ]);
 
       var options = {
-        backgroundColor: { fill: "transparent" },  // Transparent chart
+        backgroundColor: { fill: "transparent" },  // Transparent background
         legend: { position: 'bottom' }
       };
 
       var chart = new google.visualization.PieChart(document.getElementById('piechart'));
       chart.draw(data, options);
+
+      // Resize the chart when the window resizes
+      window.addEventListener('resize', function() {
+        chart.draw(data, options);
+      });
     }
   </script>
   <style>
-    /* Ensure the background is fully transparent */
+    /* Disable Scrolling & Zoom */
     html, body {
       background: none !important; 
       margin: 0; 
       padding: 0;
+      overflow: hidden;  /* Prevent scrolling */
+      width: 100%; /* Ensure full width */
+      height: 100vh; /* Full screen height */
+      touch-action: none; /* Disable zoom gestures */
     }
 
-    /* Transparent WebViewer fix */
+    /* Fix chart size to screen */
     #piechart {
-      background: none !important;
+      width: 100vw;  /* Fill entire screen width */
+      height: 50vh;  /* 50% of screen height */
+      max-width: 100%; /* Prevent overflow */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
 <body>
-  <div id="piechart" style="width: 500px; height: 300px;"></div>
+  <div id="piechart"></div>
 </body>
 </html>
