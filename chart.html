@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Status', 'Count'],
+                ['Passed', 10],
+                ['Failed', 5],
+                ['Pending', 2]
+            ]);
+
+            var options = {
+                title: 'Calibration Status',
+                is3D: true, // Set to false if you want a flat pie chart
+                width: 400,
+                height: 300
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <h2>Calibration Report</h2>
+    <div id="piechart" style="width: 400px; height: 300px;"></div>
+</body>
+</html>
